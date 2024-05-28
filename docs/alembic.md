@@ -102,7 +102,7 @@ asyncio.run(main())
 import uuid
 from datetime import datetime
 from typing import Optional, Union
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 from pydbantic import DataBaseModel, PrimaryKey, Default
 
 def time_now_str():

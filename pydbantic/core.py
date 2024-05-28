@@ -19,9 +19,9 @@ from typing import (
 )
 
 import sqlalchemy
-from pydantic import BaseModel, PrivateAttr, ValidationError
-from pydantic.fields import FieldInfo as PydanticFieldInfo
-from pydantic.fields import PrivateAttr
+from pydantic.v1 import BaseModel, PrivateAttr, ValidationError
+from pydantic.v1.fields import FieldInfo as PydanticFieldInfo
+from pydantic.v1.fields import PrivateAttr
 from sqlalchemy import (
     ARRAY,
     JSON,

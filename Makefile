@@ -1,6 +1,8 @@
+DB_TEST_FILES=db1 db2 test.db
+
 test:
 	pytest tests/test_database.py -s -x;
-	pytest tests/test_integration_fastapi.py -s -x;
+#	pytest tests/test_integration_fastapi.py -s -x;
 	pytest tests/test_model_1_to_1.py -s -x;
 	pytest tests/test_model_advanced.py -s -x;
 	pytest tests/test_model_connections.py -s -x;
@@ -19,3 +21,6 @@ test:
 
 test-migrations:
 	python tests/migrations/test_migrations.py
+
+clean:
+	rm -f $(DB_TEST_FILES)

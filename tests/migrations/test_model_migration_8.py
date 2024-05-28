@@ -3,7 +3,7 @@ import uuid
 from typing import List, Optional
 
 import pytest
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from pydbantic import Database, DataBaseModel, PrimaryKey
 
