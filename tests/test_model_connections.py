@@ -16,6 +16,10 @@ async def test_model_transactions(loaded_database_and_model):
 
             result = await all_employees[-2].save()
 
+    all_employees_pre = await Employees.all()
+    print(all_employees_pre[198])
+    print(all_employees[198])
+    # assert all_employees[198] == all_employees_pre[198]
     assert all_employees[-2] == await Employees.get(
         employee_id=all_employees[-2].employee_id
     )

@@ -1998,7 +1998,7 @@ class DataBaseModel(BaseModel):
 
         values, links = await self.serialize(self.dict(), insert=True)
 
-        query = table.insert(values)
+        query = table.insert().values(values)
         result = None
         try:
             result = await self.__metadata__.database.execute(query, values)

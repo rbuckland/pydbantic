@@ -62,7 +62,7 @@ class Database:
 
         self.DEFAULT_TRANSLATIONS = DEFAULT_TRANSLATIONS
 
-        self.metadata = sqlalchemy.MetaData(self.engine)
+        self.metadata = sqlalchemy.MetaData()
 
         if self.cache_enabled:
             cache_config = {"redis_url": redis_url} if redis_url else {}
