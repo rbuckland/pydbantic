@@ -1,11 +1,11 @@
 import setuptools
-
+NEXT_VERSION = "0.1.0"
 BASE_REQUIREMENTS = [
     "SQLAlchemy==1.4.49",
     "databases==0.8.0",
     "redis>=4.2.0",
-    "pydantic>=1.9.1",
-    "pydantic<2",
+    "pydantic>=2.7",
+    "pydantic<3",
     "alembic==1.8.1",
 ]
 MYSQL_REQUIREMENTS = [
@@ -19,14 +19,14 @@ POSTGRES_REQUIREMENTS = [
     "psycopg2==2.9.1",
 ]
 LITE_REQUIREMENTS = [
-    "aiosqlite==0.17.0",
+    "aiosqlite==0.19.0",
 ]
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 setuptools.setup(
     name="pydbantic",
-    version="NEXT_VERSION",
+    version=NEXT_VERSION,
     packages=setuptools.find_packages(include=["pydbantic"], exclude=["build"]),
     author="Joshua Jamison",
     author_email="joshjamison1@gmail.com",
