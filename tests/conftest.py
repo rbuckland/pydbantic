@@ -33,7 +33,6 @@ def db_url():
     return DB_PATH[os.environ["ENV"]]
 
 
-@pytest.mark.asyncio
 @pytest.fixture(params=[DB_URL])
 async def empty_database_and_model_no_cache(request):
     db = await Database.create(
@@ -46,7 +45,6 @@ async def empty_database_and_model_no_cache(request):
     db.metadata.drop_all(db.engine)
 
 
-@pytest.mark.asyncio
 @pytest.fixture(params=[DB_URL])
 async def database_with_cache(request):
 
@@ -109,7 +107,6 @@ async def load_db(db):
         result = await Employee.insert_many(employees)
 
 
-@pytest.mark.asyncio
 @pytest.fixture()
 async def loaded_database_and_model(database_with_cache):
     db, Employee = database_with_cache
@@ -117,7 +114,6 @@ async def loaded_database_and_model(database_with_cache):
     yield db, Employee
 
 
-@pytest.mark.asyncio
 @pytest.fixture()
 async def loaded_database_and_model_no_cache(empty_database_and_model_no_cache):
     db = empty_database_and_model_no_cache
@@ -158,7 +154,6 @@ async def loaded_database_and_model_no_cache(empty_database_and_model_no_cache):
     yield db, Employee
 
 
-@pytest.mark.asyncio
 @pytest.fixture()
 async def loaded_database_and_model_with_cache(database_with_cache):
     db = database_with_cache
@@ -199,7 +194,6 @@ async def loaded_database_and_model_with_cache(database_with_cache):
     yield db, Employee
 
 
-@pytest.mark.asyncio
 @pytest.fixture()
 async def fastapi_app_with_loaded_database(loaded_database_and_model):
     app = FastAPI()
