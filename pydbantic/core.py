@@ -1346,6 +1346,7 @@ class DataBaseModel(BaseModel):
             else primary_key
         )
 
+        #print(*[c for c in table.c if c.name in selection])
         sel = session.query(*[c for c in table.c if c.name in selection])
 
         for _sel in selection:
@@ -1636,6 +1637,7 @@ class DataBaseModel(BaseModel):
 
         primary_key = cls.__metadata__.tables[cls.__name__]["primary_key"]
         sel = session.query(table)
+#        print(f":::1 :: >>> {sel} {models_selected} {selection}")
 
         for _sel in selection:
             column_name = _sel
@@ -1652,11 +1654,14 @@ class DataBaseModel(BaseModel):
                     tables_to_select,
                     models_selected,
                 )
+                #print(f":::2 :: Joining {tables_to_select} {sel}")
                 if not foreign_model.__tablename__ in models_selected:
                     models_selected.add(foreign_model.__tablename__)
                 continue
 
+#        print(f":::2 :: making a where clause {sel}\n\tfilters=\n\t\t{column_filters}")
         sel, values = cls.where(sel, column_filters, *conditions)
+#        print(f":::2 :: after a where clause {sel}\n\tvalues=\n\t\t{values}")
 
         sel, values = cls.check_limit_offset(sel.statement, values, limit, offset)
 
@@ -1673,6 +1678,7 @@ class DataBaseModel(BaseModel):
         if not order_by is None:
             sel = sel.order_by(order_by)
 
+#         print(f"::::: >>>\n\tsel=\n\t\t{sel}\n\tmodels=\n\t\t{models_selected}\n\t\tvalues={values}")
         results = await database.fetch(sel, models_selected, tuple(values))
         return cls.parse_results(results, tables_to_select, backward_refs)
 
@@ -1951,6 +1957,7 @@ class DataBaseModel(BaseModel):
 
         query, _ = self.where(delete(table), {primary_key: getattr(self, primary_key)})
 
+        #print(f"!!!!!!!!!!! {query}")
         return await database.execute(query, None)
 
     @classmethod
@@ -1998,7 +2005,7 @@ class DataBaseModel(BaseModel):
 
         values, links = await self.serialize(self.dict(), insert=True)
 
-        query = table.insert().values(values)
+        query = table.insert().values(**values)
         result = None
         try:
             result = await self.__metadata__.database.execute(query, values)

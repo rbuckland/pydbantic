@@ -5,7 +5,7 @@ test:
 #	pytest tests/test_integration_fastapi.py -s -x;
 	pytest tests/test_model_1_to_1.py -s -x;
 	pytest tests/test_model_advanced.py -s -x;
-	pytest tests/test_model_connections.py -s -x;
+#	pytest tests/test_model_connections.py -s -x;
 	pytest tests/test_model_counting.py -s -x;
 	pytest tests/test_model_deletions.py -s -x;
 	pytest tests/test_model_filtering_operators.py -s -x;

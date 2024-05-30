@@ -640,6 +640,7 @@ class Database:
 
         async with self as conn:
             async with conn.connection():
+                #print(query)
                 row = await conn.fetch_all(query=query)
 
         if self.cache_enabled and row:

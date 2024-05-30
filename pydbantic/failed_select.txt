@@ -1,0 +1,37 @@
+::::: >>>
+SELECT employee.employee_id,
+employee.emp_ssn,
+employee.salary,
+employee.is_employed,
+employee.date_employed,
+employee_info.ssn,
+employee_info.bio_id,
+employee_info.first_name,
+employee_info.last_name,
+employee_info.address,
+employee_info.address2,
+employee_info.city,
+employee_info.zip,
+employee_info."new",
+"Positions".position_id,
+"Positions".name,
+"Department".department_id,
+"Department".name AS name_1,
+"Department".company,
+"Department".is_sensitive
+FROM employee
+LEFT OUTER JOIN employee_to_employee_info ON employee.employee_id = employee_to_employee_info.employee_employee_id
+LEFT OUTER JOIN employee_info ON employee_to_employee_info.employee_info_bio_id = employee_info.bio_id
+LEFT OUTER JOIN "Positions_to_employee" ON employee.employee_id = "Positions_to_employee".employee_employee_id
+LEFT OUTER JOIN "Positions" ON "Positions_to_employee"."Positions_position_id" = "Positions".position_id
+LEFT OUTER JOIN "Department_to_Positions" ON "Positions".position_id = "Department_to_Positions"."Positions_position_id"
+LEFT OUTER JOIN "Department" ON "Department_to_Positions"."Department_department_id" = "Department".department_id
+WHERE employee.employee_id = :employee_id_1
+{'Positions',
+'Positions_to_employee',
+'employee_info',
+'Department',
+'employee',
+'Department_to_Positions',
+'employee_to_employee_info'}
+['abcd198']
